@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="hero">
+    <div class="head">
+        <h1>Welcome to the MoneyMate App</h1>
+        <p>Securely manage your transactions online.</p>
+
+    </div>
+    <div class="features">
+        <h2>Features</h2>
+        <a href="{{ url_for('upload') }}" class="feature-btn">Upload your Documents</a>
+        <a href="{{ url_for('loan_checker') }}" class="feature-btn">Loan Eligibility</a>
+        <a href="{{ url_for('visualization') }}" class="feature-btn">Visualization</a>
+      
+    </div>
+
+</div>
+{% endblock %}

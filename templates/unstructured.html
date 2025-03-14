@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Document</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* Table Styling */
+.table {
+    width: 70%;
+    border-collapse: collapse;
+    margin: 0 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Table Header */
+.table thead {
+    background-color: #2c3e50; /* Dark blue-gray */
+    color: #ffffff; /* White text */
+}
+
+.table thead th {
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Table Body */
+.table tbody tr {
+    border-bottom: 1px solid #e0e0e0; /* Light gray border */
+    transition: background-color 0.3s ease;
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: #f8f9fa; /* Light gray for even rows */
+}
+
+.table tbody tr:hover {
+    background-color: #e9ecef; /* Slightly darker gray on hover */
+}
+
+.table tbody td {
+    padding: 12px 15px;
+    color: #495057; /* Dark gray text */
+}
+
+/* Cluster Column Styling */
+.table tbody td:last-child {
+    font-weight: 600;
+    color: #3498db; /* Blue for cluster labels */
+}
+
+/* Rounded Corners for the Table */
+.table {
+    border-radius: 8px;
+}
+
+/* Responsive Table */
+@media (max-width: 768px) {
+    .table thead {
+        display: none;
+    }
+
+    .table tbody tr {
+        display: block;
+        margin-bottom: 10px;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+    }
+
+    .table tbody td {
+        display: block;
+        text-align: right;
+        padding: 8px 10px;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    .table tbody td::before {
+        content: attr(data-label);
+        float: left;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: #2c3e50;
+    }
+
+    .table tbody td:last-child {
+        border-bottom: none;
+    }
+}
+    </style>
+</head>
+
+<body>
+        <h2>Predefined Dataset (Iris Subset)</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Petal Length</th>
+                    <th>Petal Width</th>
+                    <th>Cluster</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in range(dataset['Petal Length']|length) %}
+                <tr>
+                    <td>{{ dataset['Petal Length'][i] }}</td>
+                    <td>{{ dataset['Petal Width'][i] }}</td>
+                    <td>{{ clusters[i] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Display clustering results -->
+        <h2>Clustering Results</h2>
+        <p style="color: white;">The dataset has been clustered into 2 groups using K-Means.</p>
+    </div>
+    
+</body>
+{% endblock %}

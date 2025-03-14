@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Visualize Document Clusters</title>
+    <style>
+        /* Adjust the size of the images */
+        .image {
+            height: auto;
+            width: 500px;
+            padding: 20px;
+            display: block;
+            /* Center the image */
+            margin: 0 auto;
+            /* Center the image */
+        }
+
+        h3 {
+            color: white;
+        }
+
+        .vis-grid {
+            display: flex;
+        }
+    </style>
+</head>
+
+<body class="visualization">
+    <h2>Document Clusters Visualization</h2>
+    <div class="vis-grid">
+        <!-- Bar Chart -->
+        <div>
+            <h2>Top 10 Most Common Words</h2>
+            <img class="image" src="data:image/png;base64,{{ bar_chart_b64 }}" alt="Bar Chart">
+        </div>
+        <div>
+            <h2>Distribution of Numeric Values</h2>
+            {% if histogram_b64 %}
+            <img class="image" src="data:image/png;base64,{{ histogram_b64 }}" alt="Histogram">
+            {% else %}
+            <p>No numeric values found for histogram.</p>
+            {% endif %}
+        </div>
+        
+    </div>
+    <a href="{{ url_for('uploaded_files') }}" class="btn btn-primary m-3">Back to Uploaded Files</a>
+</body>
+
+</html>
+{% endblock %}

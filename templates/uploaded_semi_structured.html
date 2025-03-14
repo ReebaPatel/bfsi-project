@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Document</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .uploaded_semi_structured {
+            max-width: 1200px;
+            margin: 0 auto;
+            /* padding: 20px; */
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            gap: 20px;
+            color: white;
+            font-family: "poppins";
+        }
+
+        .chart-container {
+            margin: 20px 0;
+        }
+
+        .insights ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .insights ul li {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="font-family: 'poppins'; padding: 20px; ">Stock Market Analysis - {{ filename }}</h1>
+
+    <div class="uploaded_semi_structured">
+
+        <div class="chart-container">
+            <img src="data:image/png;base64,{{ plot_url }}" alt="Line Chart Visualization" style="max-width: 100%;">
+        </div>
+
+        <!-- Insights -->
+        <div class="insights">
+            <h2>Insights</h2>
+            <ul>
+                <li><strong>Columns:</strong> {{ insights.columns }}</li>
+                <li><strong>Rows:</strong> {{ insights.rows }}</li>
+                <li><strong>Average:</strong> {{ insights.average }}</li>
+                <li><strong>Minimum:</strong> {{ insights.min }}</li>
+                <li><strong>Maximum:</strong> {{ insights.max }}</li>
+                <li><strong>Trend:</strong> {{ insights.trend }}</li>
+            </ul>
+        </div>
+
+        <!-- Back Button -->
+
+    </div>
+    <a href="{{ url_for('upload') }}" class="btn btn-primary">Upload Another File</a>
+
+
+    <!-- Include Chart.js -->
+    <!-- Include Chart.js -->
+    <!-- Include Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Get the data from the template
+        const chartData = JSON.parse('{{ data | tojson | safe }}');
+        const labels = Object.keys(chartData);
+
+        // Prepare datasets for Chart.js
+        const datasets = Object.keys(chartData).map((key, index) => {
+            return {
+                label: key,  // Column name (e.g., 'Open', 'High', etc.)
+                data: chartData[key],  // Column data
+                borderColor: `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 1)`,
+                fill: false
+            };
+        });
+
+        // Render the line chart
+        const ctx = document.getElementById('lineChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: Object.keys(chartData[labels[0]]), // Use the first column's keys as labels
+                datasets: datasets
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Stock Market Data'
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+{% endblock %}

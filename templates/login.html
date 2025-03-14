@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="maindata">
+    <h2>Login</h2>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <div>{{ form.username.label }} {{ form.username() }}</div>
+        <div>{{ form.password.label }} {{ form.password() }}</div>
+        <div>{{ form.submit() }}</div>
+        <div>
+        <div style="margin-top: 20px;">
+            <p style="color: black;     justify-self: center;
+">Or</p>
+            <a href="{{ url_for('google_login') }}" style="background-color: #4285F4; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
+               
+                Sign in with Google
+            </a>
+        </div>
+    
+        <!-- Link to Registration Page -->
+        <div style="margin-top: 20px;">
+            <p style="color: black;     justify-self: center;">Dont have an account?</p>
+            <a href="{{ url_for('register') }}" style="background-color: #4285F4; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
+               Register here
+            </a>
+        </div>
+    </div>
+    </form>
+     <!-- Google Login Button -->
+    
+</div>
+{% endblock %}

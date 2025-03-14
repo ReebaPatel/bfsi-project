@@ -1,0 +1,237 @@
+/* Global Styles */
+body {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Headings */
+h1, h2 {
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Content Section */
+.content {
+    background-image: url("image.png");
+    background-size: cover; /* Ensures the image covers the entire screen */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents repeating */
+    height: 120vh; /* Full viewport height */
+    margin: 0;
+    padding: 0;
+    background-attachment: fixed;
+    overflow: hidden; 
+}
+
+.content h1, 
+.content h2 {
+    color: white;
+}
+
+.content .hero {
+    color: white;
+    width: 50%;
+    justify-self: right;
+    padding-top: 8%;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #9accf5;
+    padding: 1px 20px;
+}
+
+.navbar li {
+    color: transparent;
+}
+
+.navbar a{
+    text-decoration: none;
+    color: #1f2d38;
+    font-weight: 800;
+}
+
+.navbar .logo {
+    display: flex;
+    align-items: center;
+}
+
+.navbar .logo a {
+    color: #1f2d38;
+    font-size: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.nav-logo {
+    height: 60px; /* Adjust the size */
+    width: auto;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+/* Navigation Links */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links li {
+    display: inline;
+}
+
+.nav-links a {
+    color: #1f2d38;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+/* Form Styling */
+.maindata{
+    width: 50%;
+    justify-self: right;
+    padding: 40px;
+    padding-top: 8%;
+    color: white;
+}
+
+.maindata h2{
+    /* padding: 20px; */
+    padding-left: 110px;
+    color: white;
+}
+
+form {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    text-align: center;
+    margin: 20px auto;
+}
+
+form div {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+form label {
+    font-weight: 600;
+    color: #555;
+    display: block;
+    margin-bottom: 5px;
+}
+
+form input[type="text"],
+form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+form input[type="submit"] {
+    width: 100%;
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: #fff;
+    border: none;
+    padding: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+form input[type="submit"]:hover {
+    background: linear-gradient(135deg, #0056b3, #00408a);
+}
+
+/* Buttons */
+button {
+    background-color: #9accf5;
+    color: #00408a;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    font-weight: 800;
+}
+
+button:hover {
+    background-color: #0056b3;
+    color: white;
+    font-weight: 800;
+}
+
+/* List Reset */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.features {
+    /* text-align: center; */
+    margin-top: 20px;
+}
+
+.feature-btn {
+    display: block;
+    width: 250px;
+    padding: 10px;
+    margin: 20px ;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: #1f2d38;
+    background-color: #9accf5;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.feature-btn:hover {
+    background-color: #0056b3;
+}
+
+.footer {
+    background-color: #9accf5;
+    color: #1f2d38;
+    text-align: center;
+    padding: 1px;
+    position: relative;
+    bottom: 0;
+
+}
+
+table{
+    color: white;
+    margin: 20px;
+}
+
+.visualization .image{
+    height: 420px;
+    padding: 20px;
+}
+
+.visualization h2{
+    padding: 20px;
+
+}

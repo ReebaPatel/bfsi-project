@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Document</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .upload {
+            margin-top: 50px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="upload">
+        
+        <h1 style="padding: 20px; font-family: 'poppins';">Upload Document</h1>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <!-- Form -->
+        <form method="POST" enctype="multipart/form-data">
+            <!-- Document Type Selection -->
+            <div class="form-group">
+                <label for="document_type">Document Type:</label>
+                <select class="form-control" id="document_type" name="document_type" required onchange="toggleFields()">
+                    <option value="" disabled selected>Select a document type</option>
+                    <option value="structured">Structured (Image for OCR)</option>
+                    <option value="semi_structured">Semi-Structured (CSV File)</option>
+                    <option value="unstructured">Unstructured (Generate Random Dataset)</option>
+                </select>
+            </div>
+
+            <!-- File Upload Field (for Structured and Semi-Structured) -->
+            <div class="form-group" id="file-upload-field" style="display: none;">
+                <label for="file">Upload File:</label>
+                <input type="file" class="form-control-file" id="file" name="file">
+                <small class="form-text text-muted">
+                    For Structured: Upload an image (PNG, JPG, JPEG). For Semi-Structured: Upload a CSV file.
+                </small>
+            </div>
+
+            <!-- Process Button -->
+            <button type="submit" class="btn btn-primary">Process</button>
+            <a href="{{ url_for('uploaded_files') }}" class="btn btn-secondary">View Uploaded Files</a>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS and Dependencies (for form interactivity) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function toggleFields() {
+            var docType = document.getElementById("document_type").value;
+            var fileUploadField = document.getElementById("file-upload-field");
+
+            if (docType === "structured" || docType === "semi_structured") {
+                fileUploadField.style.display = "block";
+                document.getElementById("file").required = true;
+            } else {
+                fileUploadField.style.display = "none";
+                document.getElementById("file").required = false;
+            }
+        }
+    </script>
+</body>
+</html>
+{% endblock %}

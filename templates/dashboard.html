@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="maindata">
+    <h2>Welcome, {{ current_user.username }}</h2>
+    <p>Balance: ${{ balance }}</p>
+
+    <h3>Make a Transaction</h3>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <div>{{ form.amount.label }} {{ form.amount() }}</div>
+        <button type="submit" name="transaction_type" value="Deposit">Deposit</button>
+        <button type="submit" name="transaction_type" value="Withdraw">Withdraw</button>
+    </form>
+
+    <h3>Transaction History</h3>
+    <ul>
+        {% for transaction in transactions %}
+        <li>{{ transaction.type }} - ${{ transaction.amount }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

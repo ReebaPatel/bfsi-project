@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Loan Eligibility Results</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+    <div class="results">
+        <h2>Eligibility Results for {{ student.name }}</h2>
+
+        {% if loans %}
+        <h3>Eligible Loans:</h3>
+        <ul>
+            {% for loan in loans %}
+            <li><b>{{ loan.name }}</b> - {{ loan.eligibility }} (Interest Rate: {{ loan.interest_rate }})</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>Sorry, you are not eligible for any loans.</p>
+        {% endif %}
+
+        <br>
+        <a href="/">Check Again</a>
+    </div>
+</body>
+
+</html>
+{% endblock %}

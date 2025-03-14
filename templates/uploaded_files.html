@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Financial Document OCR</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<style>
+    /* Add custom CSS for scrollable container */
+    .uploaded_files {
+        max-height: 80vh;
+        /* Set a maximum height for the container */
+        overflow-y: auto;
+        /* Enable vertical scrolling */
+        padding: 15px;
+        /* Add some padding for better spacing */
+        border: 1px solid #ddd;
+        /* Optional: Add a border for visual clarity */
+        border-radius: 5px;
+        /* Optional: Add rounded corners */
+        overflow-x: hidden;
+    }
+
+    /* Ensure the buttons are visible and properly spaced */
+    .uploaded_files .btn {
+        margin-top: 10px;
+        /* Add margin to the buttons */
+    }
+</style>
+
+<body>
+    <div class="uploaded_files">
+
+        <h1>Uploaded Files</h1>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        {% if documents %}
+        <table class="table table-bordered">
+            <thead class="text-white">
+                <tr class="text-white">
+                    <th>ID</th>
+                    <th>Filename</th>
+                    <th>Type</th>
+                    <th class="text-white">Result (Extracted Text)</th>
+                </tr>
+            </thead>
+            <tbody class="text-white">
+                {% for doc in documents %}
+                <tr>
+                    <td>{{ doc.id }}</td>
+                    <td>{{ doc.filename }}</td>
+                    <td>{{ doc.document_type }}</td>
+                    <td class="text-white">
+                        {% if doc.document_type == 'structured' %}
+                        <pre class="text-white">{{ doc.result }}</pre>
+                        {% elif doc.document_type == 'semi_structured' %}
+                        <img src="data:image/png;base64,{{ doc.result }}" alt="CSV Visualization"
+                            style="max-width: 100%;">
+                        {% elif doc.document_type == 'unstructured' %}
+                        {{ doc.result | safe }}
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No documents uploaded yet.</p>
+        {% endif %}
+    </div>
+    <a href="{{ url_for('upload') }}" class="btn btn-primary">Upload New Document</a>
+    <a href="{{ url_for('visualization') }}" class="btn btn-secondary">View Aggregate Visualizations</a>
+
+</body>
+
+</html>
+{% endblock %}
